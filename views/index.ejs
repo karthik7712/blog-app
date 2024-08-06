@@ -1,0 +1,38 @@
+<%- include("partials/header.ejs");  %>
+<div class="posts">
+    <h2>Your Blogs</h2>
+    <div class="edit">
+        <% if(length){%>
+            <ul>
+                <% let blog_items = Object.keys(blog) %>
+                <% blog_items.forEach(item => {%>
+                    <li>
+                        <h3><%= item %></h3>
+                        <form action="/view" method="post">
+                            <input type="hidden" id="item" name="item" value="<%= item  %>">
+                            <button type="submit">view</button>
+                        </form>
+                        <form action="/edit" method="post">
+                            <input type="hidden" id="item" name="item" value="<%= item  %>">
+                            <button type="submit">Edit</button>
+                        </form>
+                        <form action="/delete" method="post">
+                            <input type="hidden" id="item" name="item" value="<%= item  %>">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </li>
+
+                <% }); %>
+            </ul>
+        <% }else{ %>
+            <p>No blogs yet..</p>
+        <% } %>
+        <form action="/create" method="GET">
+            <button type="submit" id="create-button">Create</button>
+        </form>
+    </div>        
+</div>
+
+
+
+<%- include("partials/footer.ejs"); %>
